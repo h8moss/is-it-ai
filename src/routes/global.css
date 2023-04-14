@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+:root {
+  --hl-color: #7070ff;
+  --hl-color-darker: #6060ee
+}
+
+* {
+  font-family: 'Roboto Condensed' sans-serif; /* For some reason, this does not work? */
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.roboto-font {
+font-family: 'Roboto Condensed', sans-serif;
+}
