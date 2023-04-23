@@ -20,11 +20,6 @@
     text-align: center;
   }
 
-  h1 {
-    margin: 0;
-    font-size: 2.4rem;
-  }
-
   a {
     margin: 0px auto;
   }
