@@ -15,12 +15,11 @@ export const GET = async () => {
 			{
 				role: 'system',
 				content:
-					'You are Quote-GPT, your job is to create human-sounding, quote-worthy phrases and life lessons. When user says "go", reply with and only with a human-sounding, quote-worthy phrase.'
+					'You are Quote-GPT, your job is to create human-sounding, quote-worthy phrases and life lessons. When user says "go", reply with and only with a human-sounding, quote-worthy phrase. Do not add quote characters (")'
 			},
 			{ role: 'user', content: 'go' }
-		]
+		],
+		temperature: 0.8
 	});
-	console.log(response.data.choices[0].message);
-
 	return json({ res: response.data.choices[0].message });
 };
