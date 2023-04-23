@@ -1,6 +1,11 @@
 <script >
   import './global.css';
   import TwitterCardTags from '$lib/components/TwitterCardTags';
+	import { setContext } from 'svelte';
+
+  export let data;
+
+  setContext('host', data.hostname);
 </script>
 
 <svelte:head>
