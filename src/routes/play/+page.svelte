@@ -1,54 +1,91 @@
-
-
 <script lang='ts'>
+  import type { Quote, Sides } from "$lib/types";
+	import { setContext } from "svelte";
+
+	import LoadingState from "./LoadingState.svelte";
+  import PlayingState from "./PlayingState";
+
+  export let data;
+
+   const getAIQuote = async (): Promise<Quote> =>  {
+    const quote = await fetch('/api/ai-quote');
+    const json = await quote.json();
+
+    return {
+      author: 'Chat-GPT',
+      isAI: true,
+      text: json.res.content,
+    };
+  }
+
+ const getHumanQuote = async (): Promise<Quote> =>  {
+    const quote = await fetch('/api/human-quote');
+    const json = await quote.json();
+
+    return {
+      author: json.author,
+      isAI: false,
+      text: json.text,
+    }
+  }
+
+
+  const generateQuotes = async () => {
+    const random = Math.random();
+
+    let left: Quote;
+    let right: Quote;
+
+    if (random < 0.5) {
+      [left, right] = await Promise.all([getAIQuote(), getHumanQuote()])
+    } else {
+      [right, left] = await Promise.all([getAIQuote(), getHumanQuote()])
+    }
+
+    return {left,right};
+  }
+
+
+  let quotePromise: Promise<Record<Sides, Quote>> = generateQuotes();
+  let score = 0;
+
+  const getScore = () => score;
+  setContext('getScore', getScore);
 
 </script>
 
 <div class='content roboto-font'>
-<h1>Which is AI?</h1>
-<div class='quotes'>
-  <div>QUOTE 1</div>
-  <div>QUOTE 2</div>
-</div>
-<footer>
-  <span>High score</span>
-  <span>score</span>
-</footer>
+  <div class='game'>
+  {#await quotePromise }
+    <LoadingState />
+  {:then quotes} 
+  <PlayingState 
+    {quotes} 
+    on:requestQuotes={() => quotePromise=generateQuotes()} 
+    on:increaseScore={() => score++}
+  />
+  {:catch e}
+    <p>Something went wrong :(</p>
+    <p>{e}</p>
+  {/await}
+  </div>
+  <p>Score: {score}</p>
 </div>
 
 <style>
   div.content {
-    --padding-x: 0px;
-    --padding-y: 2rem;
+    --padding-x: 1rem;
+    --padding-y: 1rem;
 
-    height: calc(100% - var(--padding-y)*2);
-    width: calc(100% - var(--padding-x)*2);
-    padding: var(--padding-y) var(--padding-x);
-
+    width: calc(100% - 2 * var(--padding-x));
+    height: calc(100% - 2 * var(--padding-y));
+    padding: 1rem;
+    
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
-    text-align: center;
   }
 
-  div.quotes {
+  div.content > div.game {
     flex: 1;
-    display: flex;
-  }
-
-  div.quotes > div
-  {
-    flex: 1;
-    margin: auto;
-  }
-
-  footer {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  footer > * {
-    margin: auto;
   }
 </style>
