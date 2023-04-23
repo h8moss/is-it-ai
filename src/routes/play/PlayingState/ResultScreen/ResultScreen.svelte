@@ -24,7 +24,9 @@
     <p>{quote.text}</p>
     <p class='author'>-{quote.author}</p>
   </div>
+{#if isWrong}
 <TwitterButton {score}/>
+{/if}
 
   <div class='buttons'>
     {#if !isWrong}
