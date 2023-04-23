@@ -1,7 +1,10 @@
 <script lang='ts'>
+	import { getContext } from 'svelte';
   import twitterImg from './twitter.png';
 
   export let score: number;
+
+  const host = getContext('host');
 </script>
 
 <div class="twitter-share-button">
@@ -11,7 +14,7 @@
        text: 
 `I just got a score of ${score} while playing the #IsItAI game! 
  
-Play it here: <URL>`
+Play it here: https://${host}`
      }).toString()}
     data-text="" 
     data-show-count="false"
