@@ -54,7 +54,7 @@
 
 </script>
 
-<div class='content roboto-font'>
+<div class='content'>
   <div class='game'>
   {#await quotePromise }
     <LoadingState />
