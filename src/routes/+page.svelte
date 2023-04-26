@@ -1,12 +1,36 @@
+<script lang='ts'>
+	import BuyMeACoffeeButton from "$lib/components/BuyMeACoffeeButton/BuyMeACoffeeButton.svelte";
+  import HowToPlayModal from "./HowToPlayModal";
 
-<div class="content roboto-font">
-<h1>Is it AI?</h1>
+  let showModal = false;
+</script>
+
+<div class="content">
+  <div class='title'>
+    <h1>Is it AI?</h1>
+    <p>Can you beat the machine?</p>
+  </div> 
 <a href='/play' class="btn">Play</a>
-<a href='/about'>Learn more</a>
+  <div class='link'>
+    <a href='/about'>Learn more</a>
+    <button on:click={() => showModal=true}>How to play?</button>
+  </div>
+  <BuyMeACoffeeButton floating/>
 </div>
 
+{#if showModal}
+<HowToPlayModal on:close={() => showModal = false} />
+{/if}
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+  div.title {
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.title > p {
+    margin-top: 0px;
+  }
 
   div.content {
     display: flex;
@@ -14,32 +38,56 @@
     
     width: 100%;
     height: 100%;
-    padding: 1rem;
 
     justify-content: space-around;
     text-align: center;
   }
 
-  a {
+  div.link > * {
     margin: 0px auto;
+
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+    color: rgba(var(--black-values), 0.7);
+    font-size: 1rem;
+    cursor: pointer;
+
+    transition: color 100ms ease-in-out;
+  }
+
+  div.link > *:hover {
+    color: var(--black)
   }
 
   a.btn {
-    background-color: var(--hl-color);
-    color: white;
+    background-color: var(--highlight);
+    color: var(--black);
+
+    white-space: nowrap;
 
     padding: 1.2rem 2rem;
     font-size: 1.5rem;
-    border-radius: 1rem;
+    border-radius: 5px;
 
     text-decoration: none;
 
-    transition-property: background-color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-in-out
+    border: none;
+
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+
+    transform: scale(1);
+
+    transition: transform 100ms ease-in-out;
   }
 
   a.btn:hover {
-    background-color: var(--hl-color-darker);
+    transform: scale(1.05);
   }
+
+
 </style>
