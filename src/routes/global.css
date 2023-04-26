@@ -1,28 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 :root {
-  --hl-color: #7070ff;
-  --hl-color-darker: #6060ee
+  --white-values: 250, 247, 244;
+  --highlight-values: 246, 203, 183;
+  --accent-values: 203, 133, 124;
+  --black-values: 156, 45, 65;
+
+  --white: rgb(var(--white-values));
+  --highlight: rgb(var(--highlight-values));
+  --accent: rgb(var(--accent-values));
+  --black: rgb(var(--black-values));
 }
 
-* {
-  font-family: 'Roboto Condensed' sans-serif; /* For some reason, this does not work? */
+body {
+  font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+button {
+  font-family: 'Roboto Condensed', sans-serif !important;
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
-}
 
-.roboto-font {
-  font-family: 'Roboto Condensed', sans-serif;
+  background-size: cover;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 h1 {
-    font-size: 2.4rem;
+    font-size: 3rem;
     text-align: center;
     margin: 0px;
-  }
+}
+
+a {
+  color: var(--black)
+}
