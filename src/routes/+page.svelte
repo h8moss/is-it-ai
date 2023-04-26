@@ -12,7 +12,6 @@
   </div> 
 <a href='/play' class="btn">Play</a>
   <div class='link'>
-    <a href='/about'>Learn more</a>
     <button on:click={() => showModal=true}>How to play?</button>
   </div>
   <BuyMeACoffeeButton floating/>
