@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"openai": "^3.2.1"
+		"openai": "^3.2.1",
+		"svelte-icons": "^2.1.0"
 	}
 }
